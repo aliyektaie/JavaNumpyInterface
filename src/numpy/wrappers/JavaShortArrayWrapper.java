@@ -1,8 +1,13 @@
 package numpy.wrappers;
 
 import numpy.IArrayWrapper;
+import numpy.Utils;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class JavaShortArrayWrapper implements numpy.IArrayWrapper {
+    public static final String D_TYPE = "<i2";
     private short[] data = null;
 
     public JavaShortArrayWrapper() {
@@ -37,4 +42,17 @@ public class JavaShortArrayWrapper implements numpy.IArrayWrapper {
     public IArrayWrapper createInstance(Object data) {
         return new JavaShortArrayWrapper((short[]) data);
     }
+
+    @Override
+    public void serializeInto(ByteArrayOutputStream output) throws IOException {
+        for (int i = 0; i < data.length; i++) {
+            output.write(Utils.serializeToBuffer(data[i], 2));
+        }
+    }
+
+    @Override
+    public String getDescriptionString() {
+        return D_TYPE; // for dtype=np.int16
+    }
+
 }

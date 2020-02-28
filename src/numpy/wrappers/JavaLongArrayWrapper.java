@@ -1,8 +1,13 @@
 package numpy.wrappers;
 
 import numpy.IArrayWrapper;
+import numpy.Utils;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class JavaLongArrayWrapper implements numpy.IArrayWrapper {
+    public static final String D_TYPE = "<i8";
     private long[] data = null;
 
     public JavaLongArrayWrapper() {
@@ -36,5 +41,17 @@ public class JavaLongArrayWrapper implements numpy.IArrayWrapper {
     @Override
     public IArrayWrapper createInstance(Object data) {
         return new JavaLongArrayWrapper((long[]) data);
+    }
+
+    @Override
+    public void serializeInto(ByteArrayOutputStream output) throws IOException {
+        for (int i = 0; i < data.length; i++) {
+            output.write(Utils.serializeToBuffer(data[i], 8));
+        }
+    }
+
+    @Override
+    public String getDescriptionString() {
+        return D_TYPE; // for dtype=np.int64
     }
 }

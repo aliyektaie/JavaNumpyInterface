@@ -2,7 +2,11 @@ package numpy.wrappers;
 
 import numpy.IArrayWrapper;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 public class JavaByteArrayWrapper implements numpy.IArrayWrapper {
+    public static final String D_TYPE = "|i1";
     private byte[] data = null;
 
     public JavaByteArrayWrapper() {
@@ -36,5 +40,15 @@ public class JavaByteArrayWrapper implements numpy.IArrayWrapper {
     @Override
     public IArrayWrapper createInstance(Object data) {
         return new JavaByteArrayWrapper((byte[]) data);
+    }
+
+    @Override
+    public void serializeInto(ByteArrayOutputStream output) throws IOException {
+        output.write(data);
+    }
+
+    @Override
+    public String getDescriptionString() {
+        return D_TYPE; // for dtype=np.int8
     }
 }

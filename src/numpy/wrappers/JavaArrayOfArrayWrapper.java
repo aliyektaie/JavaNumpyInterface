@@ -2,6 +2,8 @@ package numpy.wrappers;
 
 import numpy.IArrayWrapper;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -50,5 +52,17 @@ public class JavaArrayOfArrayWrapper implements IArrayWrapper {
     @Override
     public IArrayWrapper createInstance(Object data) {
         return new JavaArrayOfArrayWrapper(data);
+    }
+
+    @Override
+    public void serializeInto(ByteArrayOutputStream output) throws IOException {
+        for (IArrayWrapper wrapper : data) {
+            wrapper.serializeInto(output);
+        }
+    }
+
+    @Override
+    public String getDescriptionString() {
+        throw new RuntimeException("This should not happen!");
     }
 }
