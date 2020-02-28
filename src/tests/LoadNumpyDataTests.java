@@ -11,6 +11,26 @@ public class LoadNumpyDataTests {
     private final static double FLOATING_POINT_MAX_DIFFERENCE = 0.00000001;
 
     @Test
+    public void testLoadSingleDimensionIntArray() {
+        // Array saved with numpy
+        byte[] data = {-109, 78, 85, 77, 80, 89, 1, 0, 118, 0, 123, 39, 100, 101, 115, 99, 114, 39, 58, 32,
+                39, 60, 105, 52, 39, 44, 32, 39, 102, 111, 114, 116, 114, 97, 110, 95, 111, 114, 100, 101,
+                114, 39, 58, 32, 70, 97, 108, 115, 101, 44, 32, 39, 115, 104, 97, 112, 101, 39, 58, 32, 40,
+                54, 44, 41, 44, 32, 125, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+                32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+                32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 10, 1, 0, 0,
+                0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0};
+
+        int[] array = {1, 2, 3, 4, 5, 6};
+        int[] loaded = (int[]) NumpyArray.load(new ByteArrayInputStream(data));
+
+        Assert.assertEquals(array.length, loaded.length);
+        for (int i = 0; i < array.length; i++) {
+            Assert.assertEquals(array[i], loaded[i]);
+        }
+    }
+
+    @Test
     public void testLoadMultiDimensionalByteArray() {
         // Array saved with numpy
         byte[] data = {-109, 78, 85, 77, 80, 89, 1, 0, 118, 0, 123, 39, 100, 101, 115, 99, 114, 39, 58, 32,

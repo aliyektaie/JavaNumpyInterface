@@ -94,6 +94,12 @@ public class NumpyArray {
         }
         header = header.substring(header.indexOf(look) + look.length());
         header = header.substring(0, header.indexOf("),"));
+
+        if (!header.contains(" ")) {
+            // This is a single dimension data. Header value should be "N,". Should remove the last comma
+            header= header.substring(0, header.length() - 1);
+        }
+
         String[] dims = header.split(", ");
         int[] result = new int[dims.length];
 
