@@ -1,5 +1,6 @@
 package numpy.wrappers;
 
+import numpy.BinaryBuffer;
 import numpy.IArrayWrapper;
 
 import java.io.ByteArrayOutputStream;
@@ -65,4 +66,15 @@ public class JavaArrayOfArrayWrapper implements IArrayWrapper {
     public String getDescriptionString() {
         throw new RuntimeException("This should not happen!");
     }
+
+    @Override
+    public Object createWithShape(int[] shape) {
+        throw new RuntimeException("This should not happen!");
+    }
+
+    @Override
+    public Object readFromBuffer(BinaryBuffer buffer) {
+        throw new RuntimeException("This should not happen");
+    }
+
 }

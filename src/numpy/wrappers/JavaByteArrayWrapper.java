@@ -1,9 +1,11 @@
 package numpy.wrappers;
 
+import numpy.BinaryBuffer;
 import numpy.IArrayWrapper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 
 public class JavaByteArrayWrapper implements numpy.IArrayWrapper {
     public static final String D_TYPE = "|i1";
@@ -51,4 +53,15 @@ public class JavaByteArrayWrapper implements numpy.IArrayWrapper {
     public String getDescriptionString() {
         return D_TYPE; // for dtype=np.int8
     }
+
+    @Override
+    public Object createWithShape(int[] shape) {
+        return Array.newInstance(byte.class, shape);
+    }
+
+    @Override
+    public Object readFromBuffer(BinaryBuffer buffer) {
+        return buffer.readByte();
+    }
+
 }

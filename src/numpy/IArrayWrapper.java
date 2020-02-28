@@ -12,4 +12,8 @@ public interface IArrayWrapper {
 
     void serializeInto(ByteArrayOutputStream output) throws IOException;
     String getDescriptionString();
+
+    Object createWithShape(int[] shape);
+
+    Object readFromBuffer(BinaryBuffer buffer);
 }

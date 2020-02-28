@@ -1,10 +1,12 @@
 package numpy.wrappers;
 
+import numpy.BinaryBuffer;
 import numpy.IArrayWrapper;
 import numpy.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 
 public class JavaFloatArrayWrapper implements numpy.IArrayWrapper {
     public static final String D_TYPE = "<f4";
@@ -54,4 +56,15 @@ public class JavaFloatArrayWrapper implements numpy.IArrayWrapper {
     public String getDescriptionString() {
         return D_TYPE; // for dtype=np.float32
     }
+
+    @Override
+    public Object createWithShape(int[] shape) {
+        return Array.newInstance(float.class, shape);
+    }
+
+    @Override
+    public Object readFromBuffer(BinaryBuffer buffer) {
+        return buffer.readFloat();
+    }
+
 }

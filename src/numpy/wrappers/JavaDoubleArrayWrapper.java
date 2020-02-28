@@ -1,10 +1,12 @@
 package numpy.wrappers;
 
+import numpy.BinaryBuffer;
 import numpy.IArrayWrapper;
 import numpy.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 
 public class JavaDoubleArrayWrapper implements numpy.IArrayWrapper {
     public static final String D_TYPE = "<f8";
@@ -53,5 +55,15 @@ public class JavaDoubleArrayWrapper implements numpy.IArrayWrapper {
     @Override
     public String getDescriptionString() {
         return D_TYPE; // for dtype=np.double
+    }
+
+    @Override
+    public Object createWithShape(int[] shape) {
+        return Array.newInstance(double.class, shape);
+    }
+
+    @Override
+    public Object readFromBuffer(BinaryBuffer buffer) {
+        return buffer.readDouble();
     }
 }

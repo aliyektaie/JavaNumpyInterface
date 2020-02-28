@@ -44,4 +44,17 @@ public class ArrayWrappers {
 
         return result;
     }
+
+    public static IArrayWrapper getWrapperForDType(String dtype) {
+        IArrayWrapper result = null;
+
+        for (IArrayWrapper wrapper : wrappers) {
+            if (!wrapper.isArrayOfArray() && wrapper.getDescriptionString().equals(dtype)) {
+                result = wrapper;
+                break;
+            }
+        }
+
+        return result;
+    }
 }

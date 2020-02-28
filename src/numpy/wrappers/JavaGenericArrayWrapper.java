@@ -1,11 +1,13 @@
 package numpy.wrappers;
 
+import numpy.BinaryBuffer;
 import numpy.IArrayWrapper;
 import numpy.NumpyArray;
 import numpy.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 
 public class JavaGenericArrayWrapper<Type extends Number> implements IArrayWrapper {
     private Type[] data = null;
@@ -130,5 +132,15 @@ public class JavaGenericArrayWrapper<Type extends Number> implements IArrayWrapp
         }
 
         throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public Object createWithShape(int[] shape) {
+        throw new RuntimeException("This should not happen");
+    }
+
+    @Override
+    public Object readFromBuffer(BinaryBuffer buffer) {
+        throw new RuntimeException("This should not happen");
     }
 }

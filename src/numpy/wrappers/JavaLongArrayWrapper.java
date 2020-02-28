@@ -1,10 +1,12 @@
 package numpy.wrappers;
 
+import numpy.BinaryBuffer;
 import numpy.IArrayWrapper;
 import numpy.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 
 public class JavaLongArrayWrapper implements numpy.IArrayWrapper {
     public static final String D_TYPE = "<i8";
@@ -54,4 +56,15 @@ public class JavaLongArrayWrapper implements numpy.IArrayWrapper {
     public String getDescriptionString() {
         return D_TYPE; // for dtype=np.int64
     }
+
+    @Override
+    public Object createWithShape(int[] shape) {
+        return Array.newInstance(long.class, shape);
+    }
+
+    @Override
+    public Object readFromBuffer(BinaryBuffer buffer) {
+        return buffer.readLong();
+    }
+
 }
