@@ -97,7 +97,7 @@ public class NumpyArray {
 
         if (!header.contains(" ")) {
             // This is a single dimension data. Header value should be "N,". Should remove the last comma
-            header= header.substring(0, header.length() - 1);
+            header = header.substring(0, header.length() - 1);
         }
 
         String[] dims = header.split(", ");
@@ -229,21 +229,24 @@ public class NumpyArray {
 
     private String getDataShape() {
         StringBuilder result = new StringBuilder();
-        String sep = "";
 
         IArrayWrapper data = this.data;
+        boolean multi = false;
 
-        do {
-            result.append(sep);
+        while (data.isArrayOfArray()) {
             result.append(data.size());
-            sep = ", ";
+            result.append(", ");
+            multi = true;
 
-            if (data.isArrayOfArray()) {
-                data = (IArrayWrapper) data.get(0);
-            }
-        } while (data.isArrayOfArray());
+            data = (IArrayWrapper) data.get(0);
+        }
 
-        return result.toString();
+        result.append(data.size());
+        if (!multi) {
+            result.append(",");
+        }
+
+        return result.toString().trim();
     }
 
     private int addFileVersion(ByteArrayOutputStream output) throws IOException {
