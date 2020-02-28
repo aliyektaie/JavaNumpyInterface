@@ -10,12 +10,15 @@ public class ArrayWrappers {
     static {
         wrappers = new ArrayList<>();
 
-        wrappers.add(new JavaIntArrayWrapper());
         wrappers.add(new JavaByteArrayWrapper());
         wrappers.add(new JavaShortArrayWrapper());
+        wrappers.add(new JavaIntArrayWrapper());
         wrappers.add(new JavaLongArrayWrapper());
         wrappers.add(new JavaFloatArrayWrapper());
         wrappers.add(new JavaDoubleArrayWrapper());
+
+        // This should be after the atomic arrays
+        wrappers.add(new JavaArrayOfArrayWrapper());
     }
 
     public static IArrayWrapper createWrapper(Object array) {

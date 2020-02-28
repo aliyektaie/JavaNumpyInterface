@@ -7,6 +7,26 @@ import org.junit.Test;
 
 public class JavaArrayWrappersTests {
     @Test
+    public void testArrayOfArray() {
+        int[][] data = {{1,2,3}, {4,5,6}};
+
+        IArrayWrapper wrapper = ArrayWrappers.createWrapper(data);
+
+        Assert.assertTrue(wrapper instanceof JavaArrayOfArrayWrapper);
+        Assert.assertEquals(data.length, wrapper.size());
+
+        for (int i = 0; i < data.length; i++) {
+            IArrayWrapper innerWrapper = (IArrayWrapper) wrapper.get(i);
+            Assert.assertTrue(innerWrapper instanceof JavaIntArrayWrapper);
+            Assert.assertEquals(data[i].length, innerWrapper.size());
+
+            for (int j = 0; j < innerWrapper.size(); j++) {
+                Assert.assertEquals(data[i][j], innerWrapper.get(j));
+            }
+        }
+    }
+
+    @Test
     public void testJavaArrayWrapperWithIntArray() {
         int[] data = {0, 1, 2, 45, 42, 61, 8, 4};
         IArrayWrapper wrapper = ArrayWrappers.createWrapper(data);
