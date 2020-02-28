@@ -17,6 +17,13 @@ public class ArrayWrappers {
         wrappers.add(new JavaFloatArrayWrapper());
         wrappers.add(new JavaDoubleArrayWrapper());
 
+        wrappers.add(new JavaGenericArrayWrapper<Byte>());
+        wrappers.add(new JavaGenericArrayWrapper<Short>());
+        wrappers.add(new JavaGenericArrayWrapper<Integer>());
+        wrappers.add(new JavaGenericArrayWrapper<Long>());
+        wrappers.add(new JavaGenericArrayWrapper<Float>());
+        wrappers.add(new JavaGenericArrayWrapper<Double>());
+
         // This should be after the atomic arrays
         wrappers.add(new JavaArrayOfArrayWrapper());
     }
