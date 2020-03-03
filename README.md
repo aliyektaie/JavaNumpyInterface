@@ -10,6 +10,8 @@ np.save("/path/to/a/file.npy");
 array = (int[])NumpyArray.load("/path/to/an/npy/file.npy");
 ```
 
+This library is purely implemented in Java and does not have any dependencies! Just copy the code and enjoy.
+
 ## Compatibility
 
 This library uses numpy version 1.0 specification. The specification for this format is explained in:
