@@ -18,7 +18,10 @@ public class NumpyArray {
     public static Object load(String path) {
         try {
             BufferedInputStream stream = new BufferedInputStream(new FileInputStream(path));
-            return load(stream);
+            Object result = load(stream);
+            stream.close();
+
+            return result;
         } catch (Exception e) {
             if (e instanceof RuntimeException) {
                 throw ((RuntimeException) e);
